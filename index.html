@@ -1,0 +1,881 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f8f7" />
+    <script>
+      try {
+        const savedTheme = localStorage.getItem("portfolio-theme");
+        if (savedTheme === "light" || savedTheme === "dark") {
+          document.documentElement.dataset.theme = savedTheme;
+        }
+      } catch {}
+    </script>
+    <meta
+      name="description"
+      content="Portofolio Tri Jaya Prasetya: teknologi pendidikan, pengembangan sistem, tata kelola data, dan infrastruktur TI."
+    />
+    <meta property="og:title" content="Tri Jaya Prasetya — Teknologi × Pendidikan" />
+    <meta
+      property="og:description"
+      content="Membangun ekosistem digital pendidikan melalui sistem, data, dan infrastruktur yang terhubung."
+    />
+    <meta property="og:type" content="website" />
+    <title>Tri Jaya Prasetya — Teknologi × Pendidikan</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+
+@theme {
+  --color-ink: #071115;
+  --color-mint: #87f0d5;
+  --color-ice: #b8fff0;
+  --animate-orbit-float: orbit-float 8s ease-in-out infinite;
+
+  @keyframes orbit-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background: #071115;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  button { font: inherit; }
+
+  ::selection { color: #071115; background: #87f0d5; }
+}
+
+@layer components {
+  .site-shell { min-height: 100vh; overflow-x: clip; }
+  .section-wrap { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
+  .section-block { padding-block: 126px; }
+  .glass-card {
+    border: 1px solid rgb(207 255 247 / 10%);
+    background: linear-gradient(145deg, rgb(20 38 42 / 74%), rgb(12 24 29 / 70%));
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 5%), 0 24px 80px rgb(0 0 0 / 20%);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+  }
+
+  .ambient {
+    position: absolute;
+    z-index: -1;
+    width: 34rem;
+    height: 34rem;
+    border-radius: 9999px;
+    filter: blur(130px);
+    opacity: .14;
+    pointer-events: none;
+  }
+  .ambient-one { top: -17rem; right: -13rem; background: #5be6cd; }
+  .ambient-two { top: 52rem; left: -24rem; background: #4d85ff; opacity: .1; }
+  .ambient-grid {
+    position: absolute;
+    z-index: -1;
+    inset: 0 0 auto;
+    height: 760px;
+    opacity: .16;
+    pointer-events: none;
+    background-image: linear-gradient(rgb(173 231 222 / 4%) 1px, transparent 1px), linear-gradient(90deg, rgb(173 231 222 / 4%) 1px, transparent 1px);
+    background-size: 74px 74px;
+    mask-image: linear-gradient(to bottom, black, transparent 96%);
+  }
+
+  .site-header { position: sticky; top: 0; z-index: 30; border-bottom: 1px solid rgb(220 255 250 / 7%); background: rgb(7 17 21 / 76%); backdrop-filter: blur(20px); }
+  .nav-wrap { width: min(1240px, calc(100% - 48px)); height: 78px; margin-inline: auto; display: flex; align-items: center; justify-content: space-between; }
+  .brand, .footer-brand { display: inline-flex; align-items: center; gap: 11px; font-size: 14px; font-weight: 650; letter-spacing: -.03em; }
+  .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid rgb(135 240 213 / 36%); border-radius: 11px; color: #a9f9e5; background: linear-gradient(140deg, rgb(135 240 213 / 18%), rgb(135 240 213 / 3%)); font-size: 11px; font-weight: 750; letter-spacing: -.08em; }
+  .brand-name span { color: #87f0d5; }
+  .nav-links { display: flex; align-items: center; gap: 33px; color: #99a8aa; font-size: 12px; }
+  .nav-links > a:not(.nav-contact) { transition: color .2s ease; }
+  .nav-links > a:not(.nav-contact):hover, .nav-links > a:not(.nav-contact):focus-visible { color: #ecfffa; }
+  .nav-contact { padding: 11px 15px; border: 1px solid rgb(135 240 213 / 28%); border-radius: 999px; color: #d8fff5; background: rgb(135 240 213 / 7%); transition: background .2s ease, border-color .2s ease, transform .2s ease; }
+  .nav-contact:hover { transform: translateY(-1px); border-color: rgb(135 240 213 / 55%); background: rgb(135 240 213 / 12%); }
+  .nav-contact span { margin-left: 8px; color: #87f0d5; }
+  .menu-toggle { display: none; }
+
+  .hero { min-height: 690px; display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: 62px; padding-block: 75px 92px; }
+  .hero-copy { position: relative; z-index: 2; }
+  .eyebrow, .availability { display: inline-flex; align-items: center; gap: 9px; color: #a9c2bd; font-size: 10px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; }
+  .status-dot { width: 7px; height: 7px; border-radius: 999px; background: #82edce; box-shadow: 0 0 13px rgb(130 237 206 / 85%); }
+  .hero h1 { margin: 30px 0 20px; font-size: clamp(48px, 6.15vw, 78px); font-weight: 550; letter-spacing: -.075em; line-height: .99; }
+  .headline-accent { color: #a9f6e4; background: linear-gradient(110deg, #d2fff4 4%, #78e7cd 48%, #85b9ff 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero-intro { max-width: 490px; margin: 0; color: #9baeb0; font-size: 15px; line-height: 1.85; }
+  .hero-intro strong { color: #e9f7f3; font-weight: 600; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 31px; }
+  .button { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 16px; padding: 0 19px; border-radius: 999px; font-size: 12px; font-weight: 620; transition: transform .22s ease, background .22s ease, border-color .22s ease, box-shadow .22s ease; }
+  .button:hover { transform: translateY(-2px); }
+  .button-primary { color: #071613; background: #a3f5df; box-shadow: 0 9px 30px rgb(88 229 195 / 16%); }
+  .button-primary:hover { background: #c1ffed; box-shadow: 0 12px 34px rgb(88 229 195 / 24%); }
+  .button-primary span { font-size: 15px; }
+  .button-quiet { border: 1px solid rgb(222 255 250 / 14%); color: #d4e3e0; background: rgb(255 255 255 / 2%); }
+  .button-quiet:hover { border-color: rgb(222 255 250 / 28%); background: rgb(255 255 255 / 5%); }
+  .hero-meta { display: flex; align-items: center; gap: 11px; margin-top: 48px; color: #708486; font-size: 11px; }
+  .meta-line { width: 28px; height: 1px; background: #6ddcc3; }
+
+  .hero-visual { position: relative; min-height: 500px; display: grid; place-items: center; }
+  .profile-card { position: relative; z-index: 1; width: min(370px, 84%); padding: 20px; border-radius: 24px; }
+  .profile-topline { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .micro-label { color: #6f8888; font-size: 8px; font-weight: 700; letter-spacing: .15em; }
+  .availability { gap: 5px; color: #a5bdb6; font-size: 8px; font-weight: 650; letter-spacing: .04em; }
+  .avatar-stage { position: relative; display: grid; justify-items: center; padding: 29px 0 19px; }
+  .avatar-glow { position: absolute; top: 26px; width: 180px; height: 150px; border-radius: 50%; background: #42d9bd; opacity: .14; filter: blur(65px); }
+  .avatar-graphic { position: relative; width: 218px; height: 218px; }
+  .avatar-caption { position: relative; display: grid; gap: 5px; margin-top: -3px; text-align: center; }
+  .avatar-caption span { color: #829798; font-size: 10px; }
+  .avatar-caption strong { color: #e9fbf6; font-size: 15px; font-weight: 600; letter-spacing: -.03em; }
+  .profile-rule { height: 1px; background: linear-gradient(90deg, transparent, rgb(207 255 247 / 16%), transparent); }
+  .profile-bottom { display: flex; align-items: center; justify-content: space-between; padding: 17px 2px 1px; }
+  .profile-bottom p { margin: 6px 0 0; color: #d2e6e1; font-size: 11px; }
+  .profile-arrow { width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid rgb(207 255 247 / 13%); border-radius: 50%; color: #87f0d5; }
+  .visual-orbit { position: absolute; border: 1px solid rgb(161 236 222 / 11%); border-radius: 50%; transform: rotate(-24deg); }
+  .orbit-large { width: 480px; height: 290px; }
+  .orbit-small { width: 390px; height: 230px; transform: rotate(32deg); border-color: rgb(126 174 255 / 13%); }
+  .orbit-node { position: absolute; z-index: 2; width: 7px; height: 7px; border-radius: 50%; background: #9df1de; box-shadow: 0 0 20px #76e9d1; }
+  .node-one { top: 83px; right: 78px; }
+  .node-two { bottom: 92px; left: 76px; width: 5px; height: 5px; background: #8bb3ff; box-shadow: 0 0 16px #8bb3ff; }
+  .floating-note { position: absolute; z-index: 3; display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 13px; color: #a4b8b7; font-size: 9px; line-height: 1.55; }
+  .floating-note strong { color: #e0f8f0; font-weight: 600; }
+  .note-top { top: 76px; left: 0; }
+  .note-bottom { right: -9px; bottom: 81px; }
+  .note-icon { color: #a1f5dd; font-size: 18px; }
+  .note-bars { height: 19px; display: flex; align-items: end; gap: 3px; }
+  .note-bars i { width: 3px; border-radius: 5px; background: #83e8d0; }
+  .note-bars i:nth-child(1) { height: 8px; opacity: .5; }.note-bars i:nth-child(2) { height: 13px; opacity: .75; }.note-bars i:nth-child(3) { height: 17px; }.note-bars i:nth-child(4) { height: 10px; opacity: .65; }
+
+  .signal-strip { display: flex; align-items: center; justify-content: space-between; gap: 17px; padding: 25px 0; border-top: 1px solid rgb(220 255 250 / 9%); border-bottom: 1px solid rgb(220 255 250 / 9%); color: #b4c5c2; font-size: 10px; }
+  .signal-strip > span { color: #627778; font-size: 9px; letter-spacing: .11em; text-transform: uppercase; }
+  .signal-item { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+  .signal-icon { color: #7ddfc9; font-size: 8px; font-weight: 700; }
+
+  .section-heading { max-width: 690px; }
+  .section-kicker { display: flex; align-items: center; gap: 11px; margin: 0 0 22px; color: #88e6d0; font-size: 9px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+  .section-kicker span { color: #607b7d; }
+  .section-heading h2, .contact-content h2 { margin: 0; color: #e8f3f0; font-size: clamp(36px, 5vw, 57px); font-weight: 520; letter-spacing: -.065em; line-height: 1.1; }
+  .section-heading h2 em, .contact-content h2 em { color: #8ddfcf; font-style: normal; }
+  .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 90px; align-items: start; margin-top: 55px; }
+  .about-copy { max-width: 580px; }
+  .about-copy p { color: #879b9d; font-size: 13px; line-height: 1.9; }
+  .about-copy .lead-copy { margin-top: 0; color: #bed0cc; font-size: 18px; line-height: 1.75; letter-spacing: -.02em; }
+  .lead-copy span { color: #aaf4e2; }
+  .text-link { display: inline-flex; align-items: center; gap: 9px; margin-top: 14px; color: #9debd8; font-size: 11px; font-weight: 600; transition: color .2s ease, gap .2s ease; }
+  .text-link:hover { gap: 13px; color: #d2fff3; }
+  .about-aside { padding: 25px; border-radius: 18px; }
+  .aside-heading { display: flex; align-items: center; gap: 10px; padding-bottom: 18px; border-bottom: 1px solid rgb(207 255 247 / 9%); }
+  .sparkle { color: #8eead5; font-size: 17px; }
+  .principle-row { display: grid; grid-template-columns: 25px 1fr; gap: 12px; padding: 18px 0; border-bottom: 1px solid rgb(207 255 247 / 8%); }
+  .principle-row:last-child { padding-bottom: 0; border-bottom: 0; }
+  .principle-row > span { padding-top: 2px; color: #64bda9; font-size: 9px; font-weight: 650; }
+  .principle-row strong { color: #d8e9e4; font-size: 12px; font-weight: 600; }
+  .principle-row p { margin: 6px 0 0; color: #7f9696; font-size: 10px; line-height: 1.65; }
+  .metrics-row { display: flex; align-items: center; gap: 56px; margin-top: 76px; padding-top: 30px; border-top: 1px solid rgb(220 255 250 / 9%); }
+  .metric { display: flex; align-items: center; gap: 13px; }
+  .metric strong { color: #c6f8e8; font-size: 38px; font-weight: 500; letter-spacing: -.07em; line-height: 1; }
+  .metric strong span { color: #8ce8d3; font-size: 24px; }
+  .metric > span { color: #7b9091; font-size: 9px; line-height: 1.55; }
+  .metric-divider { width: 1px; height: 35px; background: rgb(220 255 250 / 12%); }
+
+  .skills-section { border-top: 1px solid rgb(220 255 250 / 7%); }
+  .heading-note { max-width: 440px; margin: 17px 0 0; color: #829698; font-size: 12px; line-height: 1.8; }
+  .skill-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; margin-top: 48px; }
+  .skill-card { min-height: 252px; padding: 22px; border-radius: 16px; transition: transform .28s ease, border-color .28s ease, background .28s ease; }
+  .skill-card:hover, .education-card:hover { transform: translateY(-5px); border-color: rgb(139 239 216 / 28%); background: linear-gradient(145deg, rgb(25 49 51 / 82%), rgb(12 24 29 / 77%)); }
+  .skill-card-top { display: flex; align-items: center; justify-content: space-between; }
+  .skill-symbol { width: 35px; height: 35px; display: grid; place-items: center; border: 1px solid currentColor; border-radius: 11px; background: rgb(255 255 255 / 3%); font-size: 14px; }
+  .symbol-mint { color: #91ebd2; }.symbol-blue { color: #8ab7ff; }.symbol-violet { color: #baa5ff; }.symbol-amber { color: #f2ca89; }.symbol-coral { color: #ffad9d; }.symbol-pink { color: #e7a9df; }
+  .skill-index { color: #5f7577; font-size: 8px; font-weight: 650; letter-spacing: .1em; }
+  .skill-card h3 { margin: 22px 0 9px; color: #dcebe6; font-size: 14px; font-weight: 600; letter-spacing: -.025em; }
+  .skill-card > p { min-height: 42px; margin: 0; color: #829697; font-size: 10px; line-height: 1.75; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 17px; }
+  .tag-list span { padding: 5px 8px; border: 1px solid rgb(207 255 247 / 9%); border-radius: 999px; color: #90a7a5; background: rgb(255 255 255 / 2%); font-size: 8px; }
+
+  .experience-section { border-top: 1px solid rgb(220 255 250 / 7%); }
+  .experience-heading { display: grid; grid-template-columns: 1fr auto; column-gap: 40px; align-items: end; max-width: none; }
+  .experience-heading .section-kicker { grid-column: 1 / -1; }
+  .experience-heading h2 { grid-column: 1; }
+  .experience-heading .heading-note { grid-column: 2; max-width: 290px; margin: 0 0 5px; }
+  .timeline { position: relative; margin-top: 55px; }
+  .timeline::before { position: absolute; top: 9px; bottom: 18px; left: 132px; width: 1px; content: ""; background: linear-gradient(#75ddc6 0, rgb(118 221 198 / 17%) 92%, transparent); }
+  .timeline-entry { position: relative; display: grid; grid-template-columns: 132px minmax(0, 1fr); column-gap: 43px; padding-bottom: 17px; }
+  .timeline-marker { position: absolute; top: 25px; left: 125px; z-index: 1; width: 15px; height: 15px; display: grid; place-items: center; border: 1px solid rgb(135 240 213 / 42%); border-radius: 50%; background: #071115; }
+  .timeline-marker span { width: 5px; height: 5px; border-radius: 50%; background: #9af3dc; box-shadow: 0 0 11px #82edce; }
+  .timeline-date { padding-top: 28px; color: #799090; font-size: 8px; font-weight: 650; letter-spacing: .09em; line-height: 1.65; }
+  .timeline-content { padding: 24px 27px; border-radius: 16px; }
+  .timeline-title-row { display: flex; align-items: start; justify-content: space-between; gap: 20px; }
+  .org-label { margin: 0 0 9px; color: #7b9c98; font-size: 8px; font-weight: 700; letter-spacing: .12em; line-height: 1.6; text-transform: uppercase; }
+  .timeline-content h3 { margin: 0; color: #dcebe6; font-size: 15px; font-weight: 600; letter-spacing: -.025em; }
+  .entry-arrow { color: #7cdcc5; font-size: 14px; }
+  .timeline-content > p { max-width: 710px; margin: 15px 0 0; color: #91a3a2; font-size: 10px; line-height: 1.8; }
+  .timeline-content > .text-link { margin-top: 13px; font-size: 9px; }
+  .timeline-summary { margin-bottom: 21px !important; }
+  .role-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 28px; padding-top: 2px; border-top: 1px solid rgb(207 255 247 / 8%); }
+  .role-item { display: grid; grid-template-columns: 10px 1fr; gap: 10px; padding: 14px 0; border-bottom: 1px solid rgb(207 255 247 / 7%); }
+  .role-dot { width: 5px; height: 5px; margin-top: 5px; border-radius: 50%; background: #80dfc8; box-shadow: 0 0 8px rgb(128 223 200 / 50%); }
+  .role-item strong { display: block; color: #c9dbd5; font-size: 9px; font-weight: 600; line-height: 1.55; }
+  .role-item div > span { display: block; margin-top: 5px; color: #718788; font-size: 8px; line-height: 1.5; }
+
+  .education-section { border-top: 1px solid rgb(220 255 250 / 7%); }
+  .education-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; margin-top: 46px; }
+  .education-card { position: relative; min-height: 220px; padding: 23px; border-radius: 16px; transition: transform .28s ease, border-color .28s ease, background .28s ease; }
+  .education-index { color: #587071; font-size: 8px; font-weight: 700; letter-spacing: .12em; }
+  .education-icon { position: absolute; top: 18px; right: 20px; color: #8ae9d1; font-size: 16px; }
+  .education-card .org-label { margin-top: 36px; }
+  .education-card h3 { margin: 0 0 8px; color: #dbeae5; font-size: 14px; font-weight: 600; }
+  .education-card > p:not(.org-label) { max-width: 260px; min-height: 32px; margin: 0; color: #829697; font-size: 9px; line-height: 1.7; }
+  .education-date { display: block; margin-top: 20px; color: #84cdbb; font-size: 8px; }
+
+  .contact-section { padding-block: 26px 115px; }
+  .contact-card { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; gap: 70px; overflow: hidden; padding: 52px; border-radius: 22px; }
+  .contact-orb { position: absolute; top: -190px; left: 29%; width: 420px; height: 420px; border-radius: 50%; background: #46d3b5; opacity: .1; filter: blur(110px); pointer-events: none; }
+  .contact-content, .contact-details { position: relative; z-index: 1; }
+  .contact-content h2 { font-size: clamp(38px, 4.4vw, 54px); }
+  .contact-content > p:not(.section-kicker) { max-width: 380px; margin: 19px 0 24px; color: #91a6a4; font-size: 11px; line-height: 1.8; }
+  .contact-content .button { min-height: 44px; }
+  .contact-details { align-self: center; }
+  .contact-details a { display: grid; grid-template-columns: 75px 1fr 15px; align-items: center; gap: 9px; padding: 15px 0; border-bottom: 1px solid rgb(207 255 247 / 10%); color: #d3e4df; font-size: 9px; transition: color .2s ease; }
+  .contact-details a:hover { color: #9af2de; }
+  .contact-details a > span:last-child { color: #74cdb6; }
+  .contact-label { color: #6e8887; font-size: 7px; font-weight: 700; letter-spacing: .11em; }
+
+  .site-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 86px; border-top: 1px solid rgb(220 255 250 / 8%); color: #64797a; font-size: 9px; }
+  .footer-brand { color: #b2c6c1; font-size: 10px; }
+  .footer-brand .brand-mark { width: 27px; height: 27px; border-radius: 9px; font-size: 9px; }
+  .site-footer p { margin: 0; }
+
+  .reveal { opacity: 1; transform: none; }
+  .js-ready .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.75,.25,1); }
+  .js-ready .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .js-ready .reveal-delay-1 { transition-delay: .12s; }
+  .js-ready .reveal-delay-2 { transition-delay: .22s; }
+
+  @media (max-width: 900px) {
+    .hero { gap: 25px; min-height: 620px; }
+    .hero h1 { font-size: clamp(48px, 7vw, 67px); }
+    .hero-visual { min-height: 440px; }
+    .profile-card { width: 90%; }
+    .floating-note { transform: scale(.92); }
+    .signal-strip { flex-wrap: wrap; justify-content: flex-start; column-gap: 25px; row-gap: 13px; }
+    .signal-strip > span { width: 100%; }
+    .about-grid { gap: 38px; }
+    .skill-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-card { gap: 35px; padding: 40px; }
+  }
+
+  @media (max-width: 680px) {
+    .section-wrap { width: min(100% - 38px, 500px); }
+    .section-block { padding-block: 88px; }
+    .nav-wrap { width: calc(100% - 38px); height: 68px; }
+    .menu-toggle { width: 40px; height: 40px; display: grid; align-content: center; justify-items: center; gap: 5px; border: 1px solid rgb(220 255 250 / 14%); border-radius: 12px; color: #e5f7f2; background: rgb(255 255 255 / 3%); cursor: pointer; }
+    .menu-toggle span { width: 15px; height: 1px; background: currentColor; transition: transform .2s ease; }
+    .menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(3px) rotate(45deg); }
+    .menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-3px) rotate(-45deg); }
+    .nav-links { position: absolute; top: 68px; right: 0; left: 0; display: none; align-items: stretch; gap: 0; padding: 7px 19px 18px; border-bottom: 1px solid rgb(220 255 250 / 10%); background: rgb(7 17 21 / 96%); backdrop-filter: blur(20px); }
+    .nav-links.is-open { display: grid; }
+    .nav-links > a:not(.nav-contact) { padding: 12px 3px; border-bottom: 1px solid rgb(220 255 250 / 7%); }
+    .nav-contact { justify-self: start; margin-top: 14px; }
+    .theme-toggle { justify-self: start; margin-top: 12px; }
+    .hero { min-height: 0; grid-template-columns: 1fr; gap: 5px; padding-block: 75px 50px; }
+    .eyebrow { font-size: 8px; }
+    .hero h1 { margin-top: 24px; font-size: clamp(49px, 13vw, 67px); }
+    .hero-intro { max-width: 440px; font-size: 13px; }
+    .hero-meta { margin-top: 28px; }
+    .hero-visual { min-height: 415px; margin-top: 12px; }
+    .profile-card { width: min(360px, 84%); }
+    .orbit-large { width: 390px; height: 250px; }
+    .orbit-small { width: 310px; height: 205px; }
+    .note-top { left: 1px; }.note-bottom { right: -2px; }
+    .signal-strip { padding: 20px 0; column-gap: 20px; row-gap: 13px; }
+    .signal-item { width: calc(50% - 10px); white-space: normal; font-size: 9px; }
+    .section-heading h2, .contact-content h2 { font-size: clamp(36px, 9vw, 48px); }
+    .section-kicker { margin-bottom: 18px; }
+    .about-grid { grid-template-columns: 1fr; gap: 30px; margin-top: 35px; }
+    .about-copy .lead-copy { font-size: 16px; }
+    .metrics-row { justify-content: space-between; gap: 10px; margin-top: 45px; }
+    .metric { align-items: start; flex-direction: column; gap: 7px; }
+    .metric strong { font-size: 32px; }
+    .metric > span { font-size: 8px; }
+    .metric-divider { height: 42px; margin-top: 5px; }
+    .skill-grid, .education-grid { grid-template-columns: 1fr; gap: 10px; margin-top: 34px; }
+    .skill-card { min-height: 0; padding: 20px; }
+    .skill-card > p { min-height: 0; }
+    .experience-heading { display: block; }
+    .experience-heading .heading-note { margin-top: 14px; }
+    .timeline { margin-top: 36px; }
+    .timeline::before { left: 7px; }
+    .timeline-entry { display: block; padding-left: 32px; padding-bottom: 15px; }
+    .timeline-marker { top: 5px; left: 0; }
+    .timeline-date { padding: 5px 0 11px; font-size: 7px; }
+    .timeline-content { padding: 19px; }
+    .timeline-content h3 { font-size: 13px; }
+    .role-list { grid-template-columns: 1fr; }
+    .role-item { padding: 12px 0; }
+    .education-card { min-height: 190px; }
+    .contact-section { padding-block: 9px 75px; }
+    .contact-card { grid-template-columns: 1fr; gap: 29px; padding: 28px 22px; }
+    .contact-details a { grid-template-columns: 63px 1fr 12px; font-size: 8px; }
+    .site-footer { flex-wrap: wrap; justify-content: space-between; padding-block: 18px; }
+    .site-footer p { order: 3; width: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    .js-ready .reveal { opacity: 1; transform: none; }
+  }
+}
+
+    
+
+@layer utilities {
+  :root[data-theme="light"] { color-scheme: light; }
+  :root[data-theme="dark"] { color-scheme: dark; }
+
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 13px;
+    border: 1px solid rgb(220 255 250 / 14%);
+    border-radius: 999px;
+    color: #dcece7;
+    background: rgb(255 255 255 / 4%);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+  }
+  .theme-toggle:hover { transform: translateY(-1px); border-color: rgb(135 240 213 / 38%); background: rgb(135 240 213 / 9%); }
+  .theme-toggle:focus-visible { outline: 2px solid #63cdb4; outline-offset: 3px; }
+  .theme-icon { color: #a3f5df; font-size: 15px; line-height: 1; }
+
+  :root[data-theme="light"] body.bg-ink.text-white { color: #1c332f; background: #f4f8f7; }
+  :root[data-theme="light"] ::selection { color: #102621; background: #a8ead8; }
+  :root[data-theme="light"] .ambient-one { opacity: .1; }
+  :root[data-theme="light"] .ambient-two { opacity: .08; }
+  :root[data-theme="light"] .ambient-grid {
+    opacity: .36;
+    background-image: linear-gradient(rgb(30 86 72 / 5%) 1px, transparent 1px), linear-gradient(90deg, rgb(30 86 72 / 5%) 1px, transparent 1px);
+  }
+  :root[data-theme="light"] .site-header { border-color: rgb(29 72 61 / 10%); background: rgb(247 251 249 / 84%); }
+  :root[data-theme="light"] .brand-mark { border-color: rgb(25 132 105 / 24%); color: #17654f; background: linear-gradient(140deg, rgb(82 208 174 / 20%), rgb(82 208 174 / 5%)); }
+  :root[data-theme="light"] .brand-name span { color: #16826b; }
+  :root[data-theme="light"] .nav-links { color: #536762; }
+  :root[data-theme="light"] .nav-links > a:not(.nav-contact):hover,
+  :root[data-theme="light"] .nav-links > a:not(.nav-contact):focus-visible { color: #173d34; }
+  :root[data-theme="light"] .nav-contact { border-color: rgb(24 130 103 / 24%); color: #17634f; background: rgb(51 178 143 / 8%); }
+  :root[data-theme="light"] .nav-contact:hover { border-color: rgb(24 130 103 / 42%); background: rgb(51 178 143 / 14%); }
+  :root[data-theme="light"] .nav-contact span { color: #187b65; }
+  :root[data-theme="light"] .menu-toggle { border-color: rgb(29 72 61 / 16%); color: #24463e; background: rgb(255 255 255 / 70%); }
+  :root[data-theme="light"] .theme-toggle { border-color: rgb(29 72 61 / 16%); color: #24463e; background: rgb(255 255 255 / 72%); }
+  :root[data-theme="light"] .theme-toggle:hover { border-color: rgb(24 130 103 / 34%); background: rgb(51 178 143 / 9%); }
+  :root[data-theme="light"] .theme-icon { color: #187a64; }
+
+  :root[data-theme="light"] .eyebrow,
+  :root[data-theme="light"] .hero-intro,
+  :root[data-theme="light"] .about-copy p,
+  :root[data-theme="light"] .heading-note,
+  :root[data-theme="light"] .skill-card > p,
+  :root[data-theme="light"] .education-card > p:not(.org-label),
+  :root[data-theme="light"] .timeline-content > p,
+  :root[data-theme="light"] .contact-content > p:not(.section-kicker) { color: #52645f; }
+  :root[data-theme="light"] .hero h1,
+  :root[data-theme="light"] .section-heading h2,
+  :root[data-theme="light"] .contact-content h2 { color: #17312c; }
+  :root[data-theme="light"] .headline-accent {
+    background-image: linear-gradient(110deg, #267d69 4%, #248d78 48%, #547fb4 100%);
+  }
+  :root[data-theme="light"] .hero-intro strong,
+  :root[data-theme="light"] .avatar-caption strong,
+  :root[data-theme="light"] .profile-bottom p,
+  :root[data-theme="light"] .floating-note strong,
+  :root[data-theme="light"] .section-heading h2 em,
+  :root[data-theme="light"] .contact-content h2 em,
+  :root[data-theme="light"] .skill-card h3,
+  :root[data-theme="light"] .timeline-content h3,
+  :root[data-theme="light"] .education-card h3,
+  :root[data-theme="light"] .principle-row strong { color: #203c35; }
+  :root[data-theme="light"] .hero-meta,
+  :root[data-theme="light"] .micro-label,
+  :root[data-theme="light"] .availability,
+  :root[data-theme="light"] .avatar-caption span,
+  :root[data-theme="light"] .floating-note,
+  :root[data-theme="light"] .timeline-date,
+  :root[data-theme="light"] .skill-index,
+  :root[data-theme="light"] .education-index,
+  :root[data-theme="light"] .contact-label,
+  :root[data-theme="light"] .site-footer { color: #5b6d68; }
+  :root[data-theme="light"] .signal-strip { color: #435b54; }
+  :root[data-theme="light"] .signal-strip > span,
+  :root[data-theme="light"] .section-kicker span,
+  :root[data-theme="light"] .skill-index,
+  :root[data-theme="light"] .education-index { color: #526b64; }
+  :root[data-theme="light"] .section-kicker,
+  :root[data-theme="light"] .text-link,
+  :root[data-theme="light"] .entry-arrow,
+  :root[data-theme="light"] .profile-arrow,
+  :root[data-theme="light"] .signal-icon,
+  :root[data-theme="light"] .sparkle,
+  :root[data-theme="light"] .education-icon,
+  :root[data-theme="light"] .education-date,
+  :root[data-theme="light"] .contact-details a > span:last-child { color: #187660; }
+  :root[data-theme="light"] .text-link:hover { color: #105844; }
+  :root[data-theme="light"] .lead-copy span,
+  :root[data-theme="light"] .availability span { color: #187c66; }
+  :root[data-theme="light"] .about-copy .lead-copy { color: #3d554e; }
+  :root[data-theme="light"] .principle-row > span { color: #187660; }
+  :root[data-theme="light"] .principle-row p,
+  :root[data-theme="light"] .metric > span,
+  :root[data-theme="light"] .role-item div > span { color: #536760; }
+  :root[data-theme="light"] .metric strong,
+  :root[data-theme="light"] .metric strong span { color: #1d715c; }
+  :root[data-theme="light"] .org-label { color: #416d60; }
+  :root[data-theme="light"] .role-item strong { color: #314b43; }
+  :root[data-theme="light"] .contact-details a { color: #314a43; }
+  :root[data-theme="light"] .contact-details a:hover { color: #176d58; }
+  :root[data-theme="light"] .footer-brand { color: #344e47; }
+
+  :root[data-theme="light"] .glass-card {
+    border-color: rgb(29 82 68 / 12%);
+    background: linear-gradient(145deg, rgb(255 255 255 / 86%), rgb(238 247 244 / 82%));
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 92%), 0 20px 60px rgb(39 88 74 / 9%);
+  }
+  :root[data-theme="light"] .skill-card:hover,
+  :root[data-theme="light"] .education-card:hover {
+    border-color: rgb(34 137 110 / 28%);
+    background: linear-gradient(145deg, rgb(255 255 255 / 96%), rgb(228 245 239 / 92%));
+  }
+  :root[data-theme="light"] .button-quiet { border-color: rgb(31 73 62 / 16%); color: #34554b; background: rgb(255 255 255 / 58%); }
+  :root[data-theme="light"] .button-quiet:hover { border-color: rgb(31 110 89 / 28%); background: rgb(255 255 255 / 86%); }
+  :root[data-theme="light"] .profile-arrow { border-color: rgb(31 96 78 / 16%); }
+  :root[data-theme="light"] .skill-symbol { background: rgb(255 255 255 / 60%); }
+  :root[data-theme="light"] .symbol-mint { color: #176b55; }
+  :root[data-theme="light"] .symbol-blue { color: #3c65a0; }
+  :root[data-theme="light"] .symbol-violet { color: #67509b; }
+  :root[data-theme="light"] .symbol-amber { color: #8c5b13; }
+  :root[data-theme="light"] .symbol-coral { color: #a2483b; }
+  :root[data-theme="light"] .symbol-pink { color: #914c86; }
+  :root[data-theme="light"] .tag-list span { border-color: rgb(37 93 78 / 13%); color: #49635b; background: rgb(255 255 255 / 64%); }
+  :root[data-theme="light"] .site-header,
+  :root[data-theme="light"] .signal-strip,
+  :root[data-theme="light"] .metrics-row,
+  :root[data-theme="light"] .skills-section,
+  :root[data-theme="light"] .experience-section,
+  :root[data-theme="light"] .education-section,
+  :root[data-theme="light"] .site-footer { border-color: rgb(34 77 65 / 12%); }
+  :root[data-theme="light"] .aside-heading,
+  :root[data-theme="light"] .principle-row,
+  :root[data-theme="light"] .role-list,
+  :root[data-theme="light"] .role-item,
+  :root[data-theme="light"] .contact-details a { border-color: rgb(34 77 65 / 12%); }
+  :root[data-theme="light"] .metric-divider { background: rgb(34 77 65 / 20%); }
+  :root[data-theme="light"] .timeline-marker { border-color: rgb(35 123 99 / 35%); background: #f4f8f7; }
+  :root[data-theme="light"] .timeline-marker span { background: #187660; box-shadow: 0 0 9px rgb(24 118 96 / 35%); }
+  :root[data-theme="light"] .nav-links { background-color: rgb(247 251 249 / 97%); }
+  :root[data-theme="light"] .nav-links > a:not(.nav-contact) { border-color: rgb(34 77 65 / 12%); }
+}
+
+    </style>
+  </head>
+  <body class="bg-ink text-white antialiased">
+    <div class="site-shell relative isolate">
+      <div class="ambient ambient-one" aria-hidden="true"></div>
+      <div class="ambient ambient-two" aria-hidden="true"></div>
+      <div class="ambient-grid" aria-hidden="true"></div>
+
+      <header class="site-header">
+        <nav class="nav-wrap" aria-label="Navigasi utama">
+          <a href="#beranda" class="brand" aria-label="Tri Jaya Prasetya, beranda">
+            <span class="brand-mark">TJ</span>
+            <span class="brand-name">Tri Jaya<span>.</span></span>
+          </a>
+
+          <button
+            class="menu-toggle"
+            type="button"
+            aria-label="Buka navigasi"
+            aria-expanded="false"
+            aria-controls="primary-menu"
+          >
+            <span></span><span></span>
+          </button>
+
+          <div class="nav-links" id="primary-menu">
+            <a href="#tentang">Tentang</a>
+            <a href="#keahlian">Keahlian</a>
+            <a href="#pengalaman">Pengalaman</a>
+            <a href="#pendidikan">Pendidikan</a>
+            <a class="nav-contact" href="#kontak">Mari terhubung <span aria-hidden="true">↗</span></a>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="Aktifkan tema gelap" title="Aktifkan tema gelap">
+              <span class="theme-icon" aria-hidden="true">☾</span>
+              <span class="theme-label">Gelap</span>
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero section-wrap" id="beranda" aria-labelledby="hero-title">
+          <div class="hero-copy reveal">
+            <div class="eyebrow"><span class="status-dot"></span> Teknologi yang berdampak untuk pendidikan</div>
+            <h1 id="hero-title">
+              Menghubungkan<br />
+              <span class="headline-accent">teknologi, data,</span><br />
+              dan pendidikan.
+            </h1>
+            <p class="hero-intro">
+              Saya <strong>Tri Jaya Prasetya</strong> — spesialis teknologi pendidikan dan pengembang sistem
+              yang membangun solusi digital untuk institusi pendidikan.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#pengalaman">Jelajahi perjalanan <span aria-hidden="true">↓</span></a>
+              <a class="button button-quiet" href="mailto:trijaya.prasetya@gmail.com">Hubungi saya <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="hero-meta">
+              <span class="meta-line"></span>
+              <span>Pekalongan, Jawa Tengah, Indonesia</span>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal reveal-delay-1" aria-label="Ringkasan profil Tri Jaya Prasetya">
+            <div class="visual-orbit orbit-large" aria-hidden="true"></div>
+            <div class="visual-orbit orbit-small" aria-hidden="true"></div>
+            <div class="orbit-node node-one" aria-hidden="true"></div>
+            <div class="orbit-node node-two" aria-hidden="true"></div>
+            <article class="profile-card glass-card animate-orbit-float">
+              <div class="profile-topline">
+                <span class="micro-label">PROFIL PROFESIONAL</span>
+                <span class="availability">PENDIDIKAN <span aria-hidden="true">×</span> TEKNOLOGI</span>
+              </div>
+              <div class="avatar-stage">
+                <div class="avatar-glow" aria-hidden="true"></div>
+                <svg class="avatar-graphic" viewBox="0 0 240 240" role="img" aria-label="Monogram TJ dalam ilustrasi abstrak">
+                  <defs>
+                    <linearGradient id="avatar-gradient" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0" stop-color="#d6fff5" />
+                      <stop offset="0.48" stop-color="#57dfc0" />
+                      <stop offset="1" stop-color="#6ca9ff" />
+                    </linearGradient>
+                    <radialGradient id="avatar-light" cx="50%" cy="35%" r="70%">
+                      <stop offset="0" stop-color="#c0fff3" stop-opacity=".23" />
+                      <stop offset="1" stop-color="#8b74ff" stop-opacity="0" />
+                    </radialGradient>
+                  </defs>
+                  <circle cx="120" cy="120" r="106" fill="url(#avatar-light)" />
+                  <circle cx="120" cy="120" r="88" fill="none" stroke="#b2fff0" stroke-opacity=".2" />
+                  <circle cx="120" cy="120" r="72" fill="#102326" stroke="#c3fff5" stroke-opacity=".16" />
+                  <path d="M69 82h102v15h-41v75h-19V97H69z" fill="url(#avatar-gradient)" />
+                  <path d="M111 111h61v14h-23v47h-16v-47h-22z" fill="#f1fffb" fill-opacity=".8" />
+                  <circle cx="187" cy="63" r="4" fill="#8df7df" />
+                  <circle cx="53" cy="151" r="3" fill="#7daaff" />
+                </svg>
+                <div class="avatar-caption"><span>Halo, saya</span><strong>Tri Jaya Prasetya</strong></div>
+              </div>
+              <div class="profile-rule"></div>
+              <div class="profile-bottom">
+                <div>
+                  <span class="micro-label">FOKUS SAAT INI</span>
+                  <p>Transformasi digital pendidikan</p>
+                </div>
+                <span class="profile-arrow" aria-hidden="true">↗</span>
+              </div>
+            </article>
+            <div class="floating-note note-top glass-card animate-orbit-float" style="animation-delay: -2.5s"><span class="note-icon">✳</span><span>Technology<br /><strong>with purpose</strong></span></div>
+            <div class="floating-note note-bottom glass-card animate-orbit-float" style="animation-delay: -4s"><span class="note-bars"><i></i><i></i><i></i><i></i></span><span>Build · Connect · Improve</span></div>
+          </div>
+        </section>
+
+        <section class="signal-strip section-wrap reveal" aria-label="Fokus profesional">
+          <span>Area kerja</span>
+          <div class="signal-item"><span class="signal-icon">01</span> Sistem & perangkat lunak</div>
+          <div class="signal-item"><span class="signal-icon">02</span> Data & tata kelola</div>
+          <div class="signal-item"><span class="signal-icon">03</span> Infrastruktur & jaringan</div>
+          <div class="signal-item"><span class="signal-icon">04</span> Teknologi pendidikan</div>
+        </section>
+
+        <section class="section-wrap section-block about-section" id="tentang" aria-labelledby="about-title">
+          <div class="section-heading reveal">
+            <p class="section-kicker"><span>01</span> Tentang saya</p>
+            <h2 id="about-title">Teknologi terbaik adalah<br /><em>yang membantu orang berkembang.</em></h2>
+          </div>
+          <div class="about-grid">
+            <div class="about-copy reveal">
+              <p class="lead-copy">
+                Saya bekerja di persimpangan <span>teknologi</span> dan <span>pendidikan</span> — merancang sistem,
+                menjaga fondasi infrastrukturnya, dan membantu institusi memanfaatkan data serta AI secara lebih berarti.
+              </p>
+              <p>
+                Selama lebih dari lima tahun di lingkungan pendidikan tinggi, saya terlibat dalam pengembangan aplikasi,
+                tata kelola data akademik, administrasi Google Workspace, serta pengelolaan server dan jaringan. Pengalaman
+                lintas bidang ini membantu saya melihat kebutuhan institusi sebagai satu ekosistem yang saling terhubung.
+              </p>
+              <a class="text-link" href="https://www.linkedin.com/in/tri-jaya-prasetya" target="_blank" rel="noreferrer">
+                Terhubung di LinkedIn <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+            <div class="about-aside glass-card reveal reveal-delay-1">
+              <div class="aside-heading"><span class="sparkle">✳</span><span class="micro-label">CARA SAYA BEKERJA</span></div>
+              <div class="principle-row"><span>01</span><div><strong>Berpikir menyeluruh</strong><p>Memahami sistem, pengguna, dan proses sebagai satu kesatuan.</p></div></div>
+              <div class="principle-row"><span>02</span><div><strong>Membangun dengan cermat</strong><p>Mengutamakan solusi yang aman, terukur, dan mudah dirawat.</p></div></div>
+              <div class="principle-row"><span>03</span><div><strong>Terus belajar</strong><p>Mengeksplorasi AI dan teknologi baru untuk kebutuhan nyata.</p></div></div>
+            </div>
+          </div>
+          <div class="metrics-row reveal">
+            <div class="metric"><strong>5<span>+</span></strong><span>tahun pengalaman<br />di pendidikan tinggi</span></div>
+            <div class="metric-divider"></div>
+            <div class="metric"><strong>8</strong><span>peran teknologi<br />di lingkungan UMPP</span></div>
+            <div class="metric-divider"></div>
+            <div class="metric"><strong>3</strong><span>ranah: aplikasi, data,<br />dan infrastruktur</span></div>
+          </div>
+        </section>
+
+        <section class="section-wrap section-block skills-section" id="keahlian" aria-labelledby="skills-title">
+          <div class="section-heading reveal">
+            <p class="section-kicker"><span>02</span> Keahlian</p>
+            <h2 id="skills-title">Fondasi teknis,<br /><em>perspektif yang lebih luas.</em></h2>
+            <p class="heading-note">Dari baris kode hingga infrastruktur produksi, dengan fokus pada kebutuhan pendidikan.</p>
+          </div>
+          <div class="skill-grid">
+            <article class="skill-card glass-card reveal">
+              <div class="skill-card-top"><span class="skill-symbol symbol-mint">{ }</span><span class="skill-index">01 / APPS</span></div>
+              <h3>Pengembangan sistem</h3>
+              <p>Aplikasi web yang menyederhanakan proses dan mendukung layanan institusi.</p>
+              <div class="tag-list"><span>Laravel</span><span>CodeIgniter</span><span>React</span><span>Inertia.js</span><span>REST API</span></div>
+            </article>
+            <article class="skill-card glass-card reveal reveal-delay-1">
+              <div class="skill-card-top"><span class="skill-symbol symbol-blue">⌘</span><span class="skill-index">02 / DATA</span></div>
+              <h3>Data & aplikasi akademik</h3>
+              <p>Menjaga mutu, integritas, sinkronisasi, dan pemanfaatan data akademik.</p>
+              <div class="tag-list"><span>MySQL</span><span>PostgreSQL</span><span>Tata kelola</span><span>Pelaporan</span></div>
+            </article>
+            <article class="skill-card glass-card reveal reveal-delay-2">
+              <div class="skill-card-top"><span class="skill-symbol symbol-violet">◈</span><span class="skill-index">03 / INFRA</span></div>
+              <h3>Server & infrastruktur</h3>
+              <p>Menyiapkan lingkungan produksi yang stabil, aman, dan siap berkembang.</p>
+              <div class="tag-list"><span>Linux</span><span>Apache</span><span>Nginx</span><span>DNS</span><span>SSL/TLS</span><span>Synology NAS</span></div>
+            </article>
+            <article class="skill-card glass-card reveal">
+              <div class="skill-card-top"><span class="skill-symbol symbol-amber">⌁</span><span class="skill-index">04 / NETWORK</span></div>
+              <h3>Jaringan & akses</h3>
+              <p>Mengelola konektivitas, jaringan nirkabel, keamanan, dan operasi layanan.</p>
+              <div class="tag-list"><span>MikroTik</span><span>Ubiquiti UniFi</span><span>NAT</span><span>Firewall</span></div>
+            </article>
+            <article class="skill-card glass-card reveal reveal-delay-1">
+              <div class="skill-card-top"><span class="skill-symbol symbol-coral">✦</span><span class="skill-index">05 / EDTECH</span></div>
+              <h3>Google Workspace & AI</h3>
+              <p>Mendukung adopsi layanan kolaborasi dan alur kerja berbantuan AI.</p>
+              <div class="tag-list"><span>Google Workspace</span><span>Gemini for Education</span><span>NotebookLM</span></div>
+            </article>
+            <article class="skill-card glass-card reveal reveal-delay-2">
+              <div class="skill-card-top"><span class="skill-symbol symbol-pink">◉</span><span class="skill-index">06 / MEDIA</span></div>
+              <h3>Audio visual & streaming</h3>
+              <p>Menopang konferensi, webinar, dan kegiatan akademik hybrid.</p>
+              <div class="tag-list"><span>OBS Studio</span><span>Video conference</span><span>Live streaming</span></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section-wrap section-block experience-section" id="pengalaman" aria-labelledby="experience-title">
+          <div class="section-heading experience-heading reveal">
+            <p class="section-kicker"><span>03</span> Pengalaman</p>
+            <h2 id="experience-title">Perjalanan lintas<br /><em>lapisan teknologi.</em></h2>
+            <p class="heading-note">Peran yang membentuk pemahaman menyeluruh tentang sistem pendidikan digital.</p>
+          </div>
+          <div class="timeline">
+            <article class="timeline-entry reveal">
+              <div class="timeline-marker"><span></span></div>
+              <div class="timeline-date">AGUSTUS 2026 — SEKARANG</div>
+              <div class="timeline-content glass-card">
+                <div class="timeline-title-row"><div><p class="org-label">EDUTECH AREA</p><h3>Founder</h3></div><span class="entry-arrow" aria-hidden="true">↗</span></div>
+                <p>Mendampingi institusi pendidikan membangun ekosistem digital yang modern, terintegrasi, aman, dan berkelanjutan.</p>
+                <a class="text-link" href="https://edutecharea.com" target="_blank" rel="noreferrer">edutecharea.com <span aria-hidden="true">↗</span></a>
+              </div>
+            </article>
+            <article class="timeline-entry reveal">
+              <div class="timeline-marker"><span></span></div>
+              <div class="timeline-date">SEPTEMBER 2020 — SEKARANG</div>
+              <div class="timeline-content glass-card">
+                <div class="timeline-title-row"><div><p class="org-label">UNIVERSITAS MUHAMMADIYAH PEKAJANGAN PEKALONGAN (UMPP)</p><h3>IT Directorate & Faculty of Health Sciences</h3></div><span class="entry-arrow" aria-hidden="true">↗</span></div>
+                <p class="timeline-summary">Berkontribusi pada pengelolaan dan pengembangan layanan teknologi kampus — dari sistem akademik dan aplikasi internal hingga server, jaringan, dan layanan audiovisual.</p>
+                <div class="role-list">
+                  <div class="role-item"><span class="role-dot"></span><div><strong>Google Workspace for Education Technical Administrator & AI Management</strong><span>Jun 2026 — Sekarang · IT Directorate</span></div></div>
+                  <div class="role-item"><span class="role-dot"></span><div><strong>Academic Data Governance & Student Information Systems Specialist</strong><span>Jun 2025 — Sekarang · IT Directorate</span></div></div>
+                  <div class="role-item"><span class="role-dot"></span><div><strong>Network & Infrastructure Engineer</strong><span>Jan 2023 — Sekarang · IT Directorate</span></div></div>
+                  <div class="role-item"><span class="role-dot"></span><div><strong>Server & Infrastructure Engineer</strong><span>Sep 2022 — Sekarang · IT Directorate</span></div></div>
+                  <div class="role-item"><span class="role-dot"></span><div><strong>End User Computing (EUC) Specialist</strong><span>Okt 2021 — Sekarang · IT Directorate</span></div></div>
+                  <div class="role-item"><span class="role-dot"></span><div><strong>Audio Visual (AV) System & Streaming Engineer</strong><span>Okt 2021 — Sekarang · IT Directorate</span></div></div>
+                  <div class="role-item"><span class="role-dot"></span><div><strong>Systems Analyst & Full-stack Developer</strong><span>Jan 2021 — Sekarang · IT Directorate</span></div></div>
+                  <div class="role-item"><span class="role-dot"></span><div><strong>IT Infrastructure & Technical Support</strong><span>Sep 2020 — Okt 2021 · Faculty of Health Sciences</span></div></div>
+                </div>
+              </div>
+            </article>
+            <article class="timeline-entry reveal">
+              <div class="timeline-marker"><span></span></div>
+              <div class="timeline-date">MARET — MEI 2018</div>
+              <div class="timeline-content glass-card">
+                <div class="timeline-title-row"><div><p class="org-label">PT. BERBAGI BINTANG TEKNOLOGI</p><h3>Quality Control Co-Founder</h3></div><span class="entry-arrow" aria-hidden="true">↗</span></div>
+                <p>Dipilih bergabung dengan tim pendiri setelah masa intern dan mendukung quality assurance, evaluasi proses, serta inisiatif perbaikan operasional.</p>
+              </div>
+            </article>
+            <article class="timeline-entry reveal">
+              <div class="timeline-marker"><span></span></div>
+              <div class="timeline-date">FEBRUARI — MARET 2018</div>
+              <div class="timeline-content glass-card">
+                <div class="timeline-title-row"><div><p class="org-label">PT. BERBAGI BINTANG TEKNOLOGI</p><h3>Web Administrator & SEO Specialist (Intern)</h3></div><span class="entry-arrow" aria-hidden="true">↗</span></div>
+                <p>Mengelola situs berbasis WordPress dan menerapkan optimasi SEO teknis serta on-page untuk meningkatkan visibilitas dan keterjangkauan konten.</p>
+              </div>
+            </article>
+            <article class="timeline-entry reveal">
+              <div class="timeline-marker"><span></span></div>
+              <div class="timeline-date">JUNI — AGUSTUS 2015</div>
+              <div class="timeline-content glass-card">
+                <div class="timeline-title-row"><div><p class="org-label">TELKOM INDONESIA</p><h3>Network Engineering Intern</h3></div><span class="entry-arrow" aria-hidden="true">↗</span></div>
+                <p>Mendapatkan pengalaman awal dalam instalasi, konfigurasi, pemantauan, dan dukungan operasional jaringan nirkabel.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section-wrap section-block education-section" id="pendidikan" aria-labelledby="education-title">
+          <div class="section-heading reveal">
+            <p class="section-kicker"><span>04</span> Pendidikan</p>
+            <h2 id="education-title">Belajar, lalu<br /><em>menerapkan.</em></h2>
+          </div>
+          <div class="education-grid">
+            <article class="education-card glass-card reveal">
+              <span class="education-index">01</span><span class="education-icon">✳</span>
+              <p class="org-label">INTERNATIONAL OPEN UNIVERSITY</p>
+              <h3>Master of Education</h3>
+              <p>Technology Teacher Education / Industrial Arts Teacher Education</p>
+              <span class="education-date">Maret 2026 — sekarang</span>
+            </article>
+            <article class="education-card glass-card reveal reveal-delay-1">
+              <span class="education-index">02</span><span class="education-icon">⌘</span>
+              <p class="org-label">STMIK WIDYA PRATAMA</p>
+              <h3>Sarjana Komputer</h3>
+              <p>Teknik Informatika</p>
+              <span class="education-date">September 2016 — Februari 2020</span>
+            </article>
+            <article class="education-card glass-card reveal reveal-delay-2">
+              <span class="education-index">03</span><span class="education-icon">⌁</span>
+              <p class="org-label">SMK MUHAMMADIYAH KAJEN</p>
+              <h3>Sistem Komputer & Jaringan</h3>
+              <p>Computer Systems Networking and Telecommunications</p>
+              <span class="education-date">2012 — 2015</span>
+            </article>
+          </div>
+        </section>
+
+        <section class="section-wrap contact-section" id="kontak" aria-labelledby="contact-title">
+          <div class="contact-card glass-card reveal">
+            <div class="contact-orb" aria-hidden="true"></div>
+            <div class="contact-content">
+              <p class="section-kicker"><span>05</span> Kontak</p>
+              <h2 id="contact-title">Punya tantangan<br /><em>yang ingin dibangun?</em></h2>
+              <p>Saya terbuka untuk percakapan tentang teknologi pendidikan, pengembangan sistem, dan transformasi digital.</p>
+              <a class="button button-primary" href="mailto:trijaya.prasetya@gmail.com">Mulai percakapan <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="contact-details">
+              <a href="mailto:trijaya.prasetya@gmail.com"><span class="contact-label">EMAIL</span><span>trijaya.prasetya@gmail.com</span><span aria-hidden="true">↗</span></a>
+              <a href="tel:+628999711600"><span class="contact-label">TELEPON</span><span>+62 899-9711-600</span><span aria-hidden="true">↗</span></a>
+              <a href="https://www.linkedin.com/in/tri-jaya-prasetya" target="_blank" rel="noreferrer"><span class="contact-label">LINKEDIN</span><span>tri-jaya-prasetya</span><span aria-hidden="true">↗</span></a>
+              <a href="https://me.edutecharea.com" target="_blank" rel="noreferrer"><span class="contact-label">PORTOFOLIO</span><span>me.edutecharea.com</span><span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer section-wrap">
+        <a href="#beranda" class="footer-brand"><span class="brand-mark">TJ</span> Tri Jaya Prasetya</a>
+        <p>Teknologi × Pendidikan × Transformasi Digital</p>
+        <span>© <span id="year">2026</span> Tri Jaya Prasetya</span>
+      </footer>
+    </div>
+    <script>
+      const themeButton = document.querySelector("[data-theme-toggle]");
+      const themeIcon = themeButton?.querySelector(".theme-icon");
+      const themeLabel = themeButton?.querySelector(".theme-label");
+      const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+
+      function updateThemeButton(theme) {
+        const nextTheme = theme === "light" ? "dark" : "light";
+        const nextLabel = nextTheme === "dark" ? "Gelap" : "Terang";
+        if (themeLabel) themeLabel.textContent = nextLabel;
+        if (themeIcon) themeIcon.textContent = nextTheme === "dark" ? "☾" : "☼";
+        if (themeButton) {
+          themeButton.setAttribute("aria-label", `Aktifkan tema ${nextLabel.toLowerCase()}`);
+          themeButton.title = `Aktifkan tema ${nextLabel.toLowerCase()}`;
+        }
+        if (themeColorMeta) themeColorMeta.content = theme === "light" ? "#f4f8f7" : "#071115";
+      }
+
+      if (themeButton) {
+        updateThemeButton(document.documentElement.dataset.theme || "light");
+        themeButton.addEventListener("click", () => {
+          const nextTheme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+          document.documentElement.dataset.theme = nextTheme;
+          updateThemeButton(nextTheme);
+          try {
+            localStorage.setItem("portfolio-theme", nextTheme);
+          } catch {}
+        });
+      }
+
+      const menuButton = document.querySelector(".menu-toggle");
+      const navLinks = document.querySelector(".nav-links");
+
+      if (menuButton && navLinks) {
+        menuButton.addEventListener("click", () => {
+          const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+          menuButton.setAttribute("aria-expanded", String(!isOpen));
+          menuButton.setAttribute("aria-label", isOpen ? "Buka navigasi" : "Tutup navigasi");
+          navLinks.classList.toggle("is-open", !isOpen);
+        });
+
+        navLinks.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            menuButton.setAttribute("aria-expanded", "false");
+            menuButton.setAttribute("aria-label", "Buka navigasi");
+            navLinks.classList.remove("is-open");
+          });
+        });
+      }
+
+      const year = document.querySelector("#year");
+      if (year) year.textContent = String(new Date().getFullYear());
+
+      if ("IntersectionObserver" in window) {
+        document.documentElement.classList.add("js-ready");
+        const revealObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -36px 0px" },
+        );
+        document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+      }
+    </script>
+  </body>
+</html>
